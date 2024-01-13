@@ -710,7 +710,7 @@
         "timeLength": 2.5
       }
     ],
-    "availability": "high",
+    "availability": "low",
     "hours": ["8am to 8pm", "9am to 8pm", "9am to 8pm", "9am to 8pm", "8am to 8pm", "8am to 8pm", "8am to 8pm"],
     "cost": ["$5/hr", "$25/day"]
   },
