@@ -309,7 +309,7 @@
         "safetyRating": 2,
         "costRating": 3,
         "accessRating": 4,
-        "comment":
+        "comment": "Average parking experience. Safety concerns due to poor lighting, but the pricing is alright."
       }
     ],
     "availability": "low",
@@ -1015,7 +1015,7 @@
     "cost": ["$3/hr", "$20/day"]
   },
   
-}
+
   "addresses": [
     {
       "address": "default",
