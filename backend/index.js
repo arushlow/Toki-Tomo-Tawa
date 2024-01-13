@@ -46,6 +46,34 @@ app.get("/api/parkingrating/:coordinate", async (req,res) => {
     res.send({"rating":sum/count});
 });
 
+//get nearby parking lots
+app.get("/api/parkinglots/:coordinate", async (req,res) => {
+    await database.read();
+    const info = database.data
+    let separate = req.params.coordinate.split(" ");
+    const currentX = separate[0];
+    const currentY = separate[1];
+    let destinationX;
+    let destinationY;
+    let calcRadius;
+    const radius =  5;
+    let parkinglots = [];
+    Object.keys(info).forEach(parkinglot => {
+        if(parkinglot != "addresses"){
+        separate = parkinglot.split(" ");
+        destinationX = separate[0];
+        destinationY = separate[1];
+        calcRadius = Math.sqrt((destinationX-currentX)**2 + (destinationY-currentY)**2);
+        console.log(parkinglot);
+        console.log(calcRadius);
+        if(calcRadius <= radius && parkinglot != "addresses"){
+            parkinglots.push(parkinglot);
+        }
+    }
+    });
+    res.send({"parking":parkinglots});
+});
+
 app.post("/api/review/:name/:overallrating", async (req,res) => {
     await database.read();
     const info = database.data
