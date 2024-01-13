@@ -1,0 +1,29 @@
+{
+  "0 0": {
+    "name": "",
+    "reviews": [
+      {
+        "id": 0,
+        "overallRating": "",
+        "safetyRating": 1,
+        "costRating": 1,
+        "accessRating": 1,
+        "comment": "",
+        "timeLength": 0
+      },
+      {
+        "id": 1,
+        "overallRating": "3"
+      }
+    ],
+    "availability": "",
+    "hours": [],
+    "cost": 0
+  },
+  "addresses": [
+    {
+      "address": "default",
+      "coordinate": "0 0"
+    }
+  ]
+}
