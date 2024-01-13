@@ -3,8 +3,8 @@ import { Low } from 'lowdb';
 import { JSONFileSync } from 'lowdb/node';
 
 const defaultData = {"0 0":{
-    "name": "",
-    "reviews": [{"id":0,"overallRating": "", "safetyRating": 1, "costRating": 1, "accessRating": 1, "comment": "", "timeLength": 0}],
+    "name": "default",
+    "reviews": [{"id":0,"overallRating": 1, "safetyRating": 1, "costRating": 1, "accessRating": 1, "comment": "", "timeLength": 0}],
     "availability": "",
     "hours": [],
     "cost": 0,
@@ -20,15 +20,30 @@ app.get("/api", (req,res) => {
     res.json({message: "Hello from the server!"});
 });
 
+//gets parking info based on given address
 app.get("/api/parkinginfo/:address", async (req,res) => {
     await database.read();
     const info = database.data
     let coordinate;
     info.addresses.forEach(addressName => {
-        if(addressName == address){
+        if(addressName.address == req.params.address){
             coordinate = addressName.coordinate;
         }
+        res.send(info[coordinate]);
     });
+});
+
+//calculate and get parking rating based on coordinates
+app.get("/api/parkingrating/:coordinate", async (req,res) => {
+    await database.read();
+    const info = database.data
+    let sum = 0;
+    let count = 0;
+    info[req.params.coordinate]["reviews"].forEach(review => {
+        sum += review.overallRating;
+        count++;
+    });
+    res.send({"rating":sum/count});
 });
 
 app.post("/api/review/:name/:overallrating", async (req,res) => {
