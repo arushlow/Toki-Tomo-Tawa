@@ -29,7 +29,7 @@ app.get("/api/parkinginfo/:address", async (req,res) => {
         if(addressName.address == req.params.address){
             coordinate = addressName.coordinate;
         }
-        res.send(info[coordinate]);
+        res.send({"coordinate": coordinate, "info":info[coordinate]});
     });
 });
 
@@ -64,8 +64,6 @@ app.get("/api/parkinglots/:coordinate", async (req,res) => {
         destinationX = separate[0];
         destinationY = separate[1];
         calcRadius = Math.sqrt((destinationX-currentX)**2 + (destinationY-currentY)**2);
-        console.log(parkinglot);
-        console.log(calcRadius);
         if(calcRadius <= radius && parkinglot != "addresses"){
             parkinglots.push(parkinglot);
         }
